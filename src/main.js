@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import VueUiSemantic from '../static/vue-ui-semantic.common'
 import App from './App'
 import Home from './components/Home'
-import Foo from './components/Foo'
+import Book from './components/Book'
 import Bar from './components/Bar'
 
 import { currency } from './currency'
@@ -20,12 +20,18 @@ router.map({
   '/home': {
     component: Home,
   },
-  '/foo': {
-    component: Foo,
+  '/book/:state': {
+    component: Book,
   },
   '/bar': {
     component: Bar,
   },
 })
+router.beforeEach(function () {
+  window.scrollTo(0, 0)
+})
 
+router.redirect({
+  '*': '/book/0'
+})
 router.start(App, 'body')

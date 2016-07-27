@@ -8,7 +8,13 @@
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "min": "uglifyjs ./static/app.js -m -c --noerr -o ./static/app.min.js",
-    "test": ""
+    "test": "NODE_ENV=test DEBUG=res-share.* ava 'src/test/**/*.js'"
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ]
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
@@ -19,6 +25,7 @@
     "wilddog": "^0.7.2"
   },
   "devDependencies": {
+    "ava": "^0.15.2",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-runtime": "^6.0.0",
@@ -36,6 +43,7 @@
     "json-loader": "^0.5.4",
     "ora": "^0.2.0",
     "shelljs": "^0.6.0",
+    "supertest": "^1.2.0",
     "url-loader": "^0.5.7",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
