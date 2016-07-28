@@ -7,26 +7,28 @@
         Log-in to your account
       </div>
     </h2>
-    <form class="ui large form">
+
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="mobileNo" placeholder="请输入手机号码">
+            <input type="text" name="email" v-bind:value='email' placeholder="请输入电子邮件">
           </div>
         </div>
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="请输入密码">
+            <input type="password" name="password" v-bind:value='pwd' placeholder="请输入密码">
           </div>
         </div>
-        <div class="ui fluid large teal submit button">登　录</div>
+        <div class="ui fluid large teal submit button">
+          <button @click="login(email,pwd)">
+            登　录
+          </button>
+         </div>
       </div>
 
-      <div class="ui error message"></div>
-
-    </form>
+     <div class="ui error message"></div>
 
     <div class="ui message">
       新用户 <a href="#">注　册</a>
@@ -37,22 +39,22 @@
 </template>
 
 <script>
-//import $ from 'jquery'
+import { login } from '../vuex/actions'
 export default {
-  data () {
+  data(){
     return {
-      // note: changing this line won't causes changes
-      // with hot-reload because the reloaded component
-      // preserves its current state and we are modifying
-      // its initial state.
-      msg: 'Hello Vue!'
+      email:'111',
+      pwd: '222'
     }
    },
-   methods:{
-     demo(){
-       console.log($('#tx')[0].value)
-     }
-   }
+  vuex: {
+    getters: {
+      auth_id: ({ auth }) => auth.auth_id
+    },
+    actions: {
+      login
+    }
+  },
 
 }
 </script>

@@ -1,3 +1,6 @@
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const LOGIN_PASS = 'LOGIN_PASS'
+
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const CHECKOUT_REQUEST = 'CHECKOUT_REQUEST'
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS'

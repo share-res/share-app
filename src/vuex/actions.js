@@ -1,6 +1,18 @@
 import shop from '../api/shop'
-import * as types from './mutation-types'
 
+import * as types from './mutation-types'
+/*
+export const login = ({ dispatch }, email,pwd) => {
+  auth.login(email,pwd,
+    (err,data) => {
+      if(err)
+         dispatch(types.LOGIN_FAILURE)
+      else
+        dispatch(types.LOGIN_PASS,data.uid)
+    }
+  )
+}
+*/
 export const addToCart = ({ dispatch }, product) => {
   if (product.inventory > 0) {
     dispatch(types.ADD_TO_CART, product.id)

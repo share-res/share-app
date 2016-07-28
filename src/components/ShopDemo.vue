@@ -1,4 +1,4 @@
-template>
+<template>
   <div>
     <h1>Shopping Cart Example</h1>
     <hr>
