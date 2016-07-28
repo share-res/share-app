@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getAllProducts, addToCart } from '../vuex/actions'
+import { getAllProducts, addToCart } from '../../vuex/actions'
 
 export default {
   vuex: {

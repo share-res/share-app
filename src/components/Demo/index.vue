@@ -1,5 +1,9 @@
 <template>
   <div>
+    <button 
+        @click="home()">
+        Back to Home
+      </button>
     <h1>Shopping Cart Example</h1>
     <hr>
     <h2>Products</h2>
@@ -14,7 +18,13 @@ import ProductList from './ProductList.vue'
 import Cart from './Cart.vue'
 
 export default {
-  components: { ProductList, Cart }
+  components: { ProductList, Cart },
+  methods:{
+    home(){
+      router.go({ name: 'home', params: { userId: 123 },query:{tag:'DOG'}})
+    }
+  }
+ 
 }
 </script>
 <style scoped>

@@ -2,41 +2,34 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueFire from 'vuefire'
 import VueUiSemantic from '../static/vue-ui-semantic.common'
-import App from './App'
-import Home from './components/Home'
-import Shop from './components/ShopDemo'
+import { sync } from 'vuex-router-sync'
 
-import { currency } from './currency'
+import store from './vuex/store'
 
-Vue.filter('currency', currency)
+import configRouter from './routes'
+import filters from './utils/filters'
+
+import App from './components/App'
+
+
 
 Vue.use(VueRouter)
 Vue.use(VueFire)
 Vue.use(VueUiSemantic)
-
-const router = new VueRouter()
-
-router.map({
-  '/home': {
-    component: Home
-  },
-  '/shop': {
-    component: Shop
-  }
- /* '/login': {
-    component: Login,
-  },*/
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
+const router = new VueRouter( {
+  history: true,
+  saveScrollPosition: true,
+  suppressTransitionError: true
 })
 router.beforeEach(function () {
   window.scrollTo(0, 0)
 })
 
-router.redirect({
-  '*': '/home'
-})
-/*
-App.$on(LOGIN_PASS,(uid)=>{
-    console.log('App got msg')
-   //router.go
-})*/
-router.start(App, 'body')
+configRouter(router)
+sync(store, router)
+
+router.start(App, 'body') //Vue.extend(
+window.router = router
+router.go({ name: 'home', params: { userId: 123 }})
+

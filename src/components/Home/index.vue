@@ -1,7 +1,12 @@
 <template>
+ <p>当前路径: {{$route.path}}</p>
+  <p>当前路由参数: {{$route.params | json}}</p>
+  <p>当前查询参数: {{$route.query | json}}</p>
+<ui-divider></ui-divider>
       <ui-menu css="secondary">
       <ui-menu css="right">
         <ui-item>
+ 
           <ui-input css="icon">
             <input type="text" v-bind:value="books.length" placeholder="Search...">
             <ui-icon css="search link"></ui-icon>
@@ -52,8 +57,8 @@ itemsRef.authWithPassword({
 })
 
 export default {
-  data() {
-     return { newTitle: '',newPrice:0}
+  data () {
+    return { newTitle: '',newPrice:0}
   },
   firebase: {
      books: itemsRef.limitToLast(25)

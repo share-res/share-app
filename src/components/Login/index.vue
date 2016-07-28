@@ -39,7 +39,8 @@
 </template>
 
 <script>
-import { login } from '../vuex/actions'
+  /*
+import { login } from '../../vuex/actions'
 export default {
   data(){
     return {
@@ -56,7 +57,7 @@ export default {
     }
   },
 
-}
+}*/
 </script>
 
 <style scoped>
