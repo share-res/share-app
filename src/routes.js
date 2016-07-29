@@ -1,14 +1,17 @@
 export default function (router) {
   let Home=require('./components/Home/index.vue')
   router.map({
- /*   '/': {
-      component: Home
-    },*/
-     '/home/:userId': {
+
+     '/home/:tag': {
       name: 'home', // 给这条路径加上一个名字
       component: Home
     },
+    '/book': {
+      name: 'book', // 给这条路径加上一个名字
+      component: require('./components/Home/AddBook.vue')
+    },
     '/demo': {
+      name: 'demo', 
       component: require('./components/Demo/index.vue')
     },
      '*': {

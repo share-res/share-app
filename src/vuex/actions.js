@@ -1,6 +1,15 @@
 import shop from '../api/shop'
-
+import books from '../api/books'
 import * as types from './mutation-types'
+
+
+export const getAllBooks = ({ dispatch }) => {
+  books.fetchItemsByPage(1).then(data => {
+    console.log(data)
+    dispatch(types.RECEIVE_BOOKS, data)
+  })
+}
+
 /*
 export const login = ({ dispatch }, email,pwd) => {
   auth.login(email,pwd,

@@ -1,7 +1,8 @@
 
 import test from 'ava'
+import 'babel-polyfill'
 import supertest from 'supertest'
-import Firebase from 'wilddog'
+import Wilddog from 'wilddog'
 
 const sleep = (ms) => {
   return new Promise((resolve, reject) => {
@@ -51,7 +52,7 @@ function authDataCallback(authData) {
 }
  
 test('wilddog Auth', async (t) => {
-    let  ref = new Firebase('https://books.wilddogio.com/')
+    let  ref = new Wilddog('https://books.wilddogio.com/')
    // ref.onAuth(authDataCallback)
     let authData = ref.getAuth();
     t.is(authData,null)
@@ -72,45 +73,53 @@ test('wilddog Auth', async (t) => {
 })
 */
 test('wilddog CRUD demo', async (t) => {
-    let  itemsRef = new Firebase('https://books.wilddogio.com/')
-/*    itemsRef.on("value", function(data) {
-       console.log("====================")
-       console.log(data.val())
-    })*/
-   let authData=await  itemsRef.authWithPassword({
-        email    : 'test@139.com',
-        password : 'test'
-   })
-   await itemsRef.remove()
+  let booksRef = new Wilddog('https://books.wilddogio.com/books')
+  let usersRef = new Wilddog('https://books.wilddogio.com/users')
+  let topsRef = new Wilddog('https://books.wilddogio.com/tops')
+  let authData = await booksRef.authWithPassword({
+    email: 'test@139.com',
+    password: 'test'
+  })
+await usersRef.remove()
 
-   console.log("Insert a book")
-   let bookRef=itemsRef.push({
-        title: 'book demo',
-        price: 120,
-        tags:['art','XX'],
-        owner_id:authData.uid,
-        state:'OK'
-    })
-   console.log(bookRef.key())
-   let errcode= await  bookRef.child("owner").set({
+await booksRef.remove()
+
+await topsRef.remove()
+
+  booksRef.on("value", function (data) {
+    console.log("====================")
+    console.log(data.val())
+  })
+
+  let uid=`${authData.uid}`
+  let errcode =await  usersRef.update({
+    [`${uid}`]: {
       city: "GZ",
-      mobile:'139876878123',
-      name: "alex"
-   })
-   t.true(!errcode)
-   errcode= await bookRef.update({
-       "city": "SZ"
-   })
-   t.true(!errcode)
-   await sleep(500)
-
-  // await Firebase.goOffline()
-   authData=await  bookRef.authWithPassword({
-        email    : 'lsj178@139.com',
-        password : '1234'
-   })
-   let authData2 = itemsRef.getAuth();
-   t.is(authData2.uid,authData.uid)
-   await bookRef.update({title:'UPDATE'})
-  // await Firebase.goOffline()
+      mobile: '139876878123',
+      name: "alex",
+      state: 'OK'
+    }
+  })
+t.true(errcode==null)
+  let ids=[];
+  for (let i = 0; i < 30; i++) {
+    let bookRef =await booksRef.push({
+      title: 'book ' + i,
+      price: 100 + i,
+      tags: ['art', 'math'],
+      description: 'this is ' + i + ' book!',
+      owner_id: authData.uid,
+      state: 'OK'
+    })
+  
+    if (i < 10) {
+      let key=bookRef.key()
+      ids.push(key)
+    }
+    await topsRef.set(ids)
+ 
+    await sleep(50)
+    // await Wilddog.goOffline()
+  }
+ 
 })

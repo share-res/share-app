@@ -21,7 +21,7 @@ export default {
   components: { ProductList, Cart },
   methods:{
     home(){
-      router.go({ name: 'home', params: { userId: 123 },query:{tag:'DOG'}})
+      router.go({ name: 'home', params: { tag: 'art' },query:{page:1}})
     }
   }
  

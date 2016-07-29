@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-//import auth from './modules/auth'
+import books from './modules/books'
 import cart from './modules/cart'
 import products from './modules/products'
 import createLogger from 'vuex/logger'
@@ -13,6 +13,7 @@ Vue.config.debug = debug
 
 export default new Vuex.Store({
   modules: {
+    books,
     cart,
     products
   },

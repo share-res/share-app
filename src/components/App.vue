@@ -1,7 +1,11 @@
 <template>
 
   <ui-sidebar v-ref:my_sidebar css="inverted vertical menu">
-    <ui-item type="a" href="#!/home/123">可借阅</ui-item>
+     <a class="item" v-link="{path:'/book'}">
+          <ui-icon css="large dashboard"></ui-icon>
+          登记书籍
+      </a>
+ 
     <ui-item type="a" href="#!/demo">主题分类</ui-item>
   </ui-sidebar>
   <ui-pusher>
@@ -14,6 +18,7 @@
 <script>
 import store from '../vuex/store'
 import Navbar from './Navbar'
+
 export default {
   replace: false,
   store,

@@ -4,7 +4,7 @@
         <a class="item" @click="onSidebar()">
           <ui-icon css="large content"></ui-icon>
         </a>
-        <a class="item" v-link="{ name: 'home',params:{userId:'123'} }">
+        <a class="item" v-link="{ name: 'home',params:{tag:'art'} }">
           <ui-icon css="large home"></ui-icon>
         </a>
         <a class="item" v-link="{path:'/demo'}">
