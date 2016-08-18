@@ -75,24 +75,25 @@ test('wilddog Auth', async (t) => {
 test('wilddog CRUD demo', async (t) => {
   let booksRef = new Wilddog('https://books.wilddogio.com/books')
   let usersRef = new Wilddog('https://books.wilddogio.com/users')
-  let topsRef = new Wilddog('https://books.wilddogio.com/tops')
+  let tagsRef = new Wilddog('https://books.wilddogio.com/tags')
   let authData = await booksRef.authWithPassword({
     email: 'test@139.com',
     password: 'test'
   })
-await usersRef.remove()
+  await usersRef.remove()
 
-await booksRef.remove()
+  await booksRef.remove()
 
-await topsRef.remove()
+  await tagsRef.remove()
 
   booksRef.on("value", function (data) {
     console.log("====================")
     console.log(data.val())
   })
-
-  let uid=`${authData.uid}`
-  let errcode =await  usersRef.update({
+  let tags = ['ART', 'TECH']
+  await tagsRef.set(tags)
+  let uid = `${authData.uid}`
+  let errcode = await usersRef.update({
     [`${uid}`]: {
       city: "GZ",
       mobile: '139876878123',
@@ -100,26 +101,21 @@ await topsRef.remove()
       state: 'OK'
     }
   })
-t.true(errcode==null)
-  let ids=[];
+  t.true(errcode == null)
+  let ids = [];
   for (let i = 0; i < 30; i++) {
-    let bookRef =await booksRef.push({
+    let bookRef = await booksRef.push({
       title: 'book ' + i,
       price: 100 + i,
-      tags: ['art', 'math'],
+      tags: [tags[i % 2]],
       description: 'this is ' + i + ' book!',
       owner_id: authData.uid,
       state: 'OK'
     })
-  
-    if (i < 10) {
-      let key=bookRef.key()
-      ids.push(key)
-    }
-    await topsRef.set(ids)
- 
+
+
     await sleep(50)
     // await Wilddog.goOffline()
   }
- 
+
 })

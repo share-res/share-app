@@ -1,33 +1,30 @@
 export default function (router) {
-  let Home=require('./components/Home/index.vue')
   router.map({
-
-     '/home/:tag': {
-      name: 'home', // 给这条路径加上一个名字
-      component: Home
+    '/': {
+      name: 'home',
+      component: require('./views/listBooks.vue')
     },
-    '/book': {
-      name: 'book', // 给这条路径加上一个名字
-      component: require('./components/Home/AddBook.vue')
+    '/addBook': {
+      auth: true,
+      name: 'addBook', // 给这条路径加上一个名字
+      component: require('./views/addBook.vue')
+    },
+    '/login': {
+      name: 'login',
+      component: require('./views/login.vue'),
+    },
+    '/myBooks': {
+     // auth: true,
+      name: 'myBooks', 
+      component: require('./views/myBooks.vue')
     },
     '/demo': {
       name: 'demo', 
-      component: require('./components/Demo/index.vue')
+      component: require('./views/Demo')
     },
      '*': {
-      component: require('./components/NotFound.vue')
+      component: require('./views/404')
     }
- /*   '/login': {
-      name: 'login',
-      component: require('./components/Login/index.vue')
-    },
-    '/settings': {
-      name: 'settings',
-      component: require('./components/Settings/index.vue')
-    },
-    '/article/:aid':{
-      name: 'article',
-      component: require('./components/Article/index.vue')
-    },*/
+
   })
 }

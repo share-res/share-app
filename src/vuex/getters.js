@@ -8,3 +8,10 @@ export const cartProducts = state => {
     }
   })
 }
+export const myBooks = state => {
+  return state.user.books
+}
+
+export const route = state => {
+  return state.route
+}

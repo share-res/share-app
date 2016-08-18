@@ -1,9 +1,5 @@
 <template>
- <p>当前路径: {{$route.path}}</p>
-  <p>当前路由参数: {{$route.params | json}}</p>
-  <p>当前查询参数: {{$route.query | json}}</p>
- 
-<ui-divider></ui-divider>
+
       <ui-menu css="secondary">
       <ui-menu css="right">
         <ui-item>
@@ -21,11 +17,13 @@
 </template>
 
 <script>
-import Book from './Book'
+import Book from '../components/Book'
 import Wilddog from 'wilddog'
 
 
 export default {
+  components: { Book},
+
  /* vuex: {
     getters: {
       items: ({ books }) => books.all,
@@ -35,9 +33,9 @@ export default {
       getAllBooks
     }
   },*/
-  components: { Book},
+  
   wilddog: {
-     books: new Wilddog('https://books.wilddogio.com/books')
+    books: new Wilddog('https://books.wilddogio.com/books').limitToLast(10)
   }
 }
 </script>

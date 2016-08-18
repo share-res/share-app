@@ -1,37 +1,44 @@
-/** 
- *  格式化文章發布時間
- */
-exports.customTime = item => {
-  let nowTime = new Date().getTime()
-  let minuteTime = 60*1000
-  let hourTime = 60*minuteTime
-  let dayTime = 24*hourTime
-  let monthTime = dayTime * 30
-  let yearTime = monthTime * 12
-
-  let publishTime = new Date(item).getTime()
-  let historyTime = parseInt(nowTime) - parseInt(publishTime)
-  let descTime
-  if(historyTime >= yearTime){
-    //按年算
-    descTime = parseInt(historyTime/yearTime) + '年前'
-  }else if(historyTime< yearTime && historyTime >= monthTime){
-    //按月算
-    descTime = parseInt(historyTime/monthTime) + '月前'
-  }else if(historyTime< monthTime && historyTime>= dayTime){
-    //按天算
-    descTime = parseInt(historyTime/dayTime) + '天前'
-  }else if(historyTime< dayTime && historyTime>= hourTime){
-    //按小时算
-    descTime = parseInt(historyTime/hourTime) + '小时前'
-  }else if(historyTime< hourTime && historyTime>= minuteTime){
-    //按分钟算
-    descTime = parseInt(historyTime/minuteTime) + '分钟前'
-  }else{
-    descTime = '刚刚'
+exports.timeToNow = (time) => {
+  const t = parseFloat(new Date - new Date(time)) / 1000;
+  let str;
+  if (t) {
+    if (t > 60 && t < 3600) {
+      str = `${parseInt(t / 60.0, 10)}分钟前`;
+    } else if (t >= 3600 && t < 86400) {
+      str = `${parseInt(t / 3600.0, 10)}小时前`;
+    } else if (t >= 86400 && t < 86400 * 30) {
+      str = `${parseInt(t / 86400.0, 10)}天前`;
+    } else if (t >= 86400 * 30 && t < 86400 * 365) {
+      str = `${parseInt(t / (86400.0 * 30), 10)}个月前`;
+    } else if (t >= 86400 * 365) {
+      str = `${parseInt(t / (86400.0 * 365), 10)}年前`;
+    } else {
+      str = `${parseInt(t, 10)}秒前`;
+    }
   }
-  return descTime
-}
+  return str;
+};
+
+exports.transTab = (tab) => {
+  let str;
+  switch (tab) {
+    case 'good':
+      str = '精华';
+      break;
+    case 'share':
+      str = '分享';
+      break;
+    case 'job':
+      str = '招聘';
+      break;
+    case 'ask':
+      str = '问答';
+      break;
+    default:
+  }
+  return str;
+};
+
 
 exports.formatDate =  time => {
   let tmpDate = new Date(time)

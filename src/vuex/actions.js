@@ -1,27 +1,34 @@
 import shop from '../api/shop'
-import books from '../api/books'
 import * as types from './mutation-types'
+import Wilddog from 'wilddog'
+let dbRef = new Wilddog('https://books.wilddogio.com')
 
-
-export const getAllBooks = ({ dispatch }) => {
-  books.fetchItemsByPage(1).then(data => {
-    console.log(data)
-    dispatch(types.RECEIVE_BOOKS, data)
-  })
+export const getMyBooks = ({ dispatch }) => {
+    dispatch(types.USER_GETBOOKS)
+ 
 }
 
-/*
-export const login = ({ dispatch }, email,pwd) => {
-  auth.login(email,pwd,
+export const updateUserInfo = ({ dispatch,state }, user) => {
+    dispatch(types.USER_UPDATEED,user)
+    login({dispatch,state},user)
+  
+}
+export const login = ({ dispatch ,state},user) => {
+  dbRef.authWithPassword(user,
     (err,data) => {
       if(err)
          dispatch(types.LOGIN_FAILURE)
-      else
-        dispatch(types.LOGIN_PASS,data.uid)
+      else{
+         // console.log(state.route)
+          let redirect=decodeURIComponent(state.route.query.redirect || '/')
+          dispatch(types.LOGIN_PASS,data.uid,redirect)
+ 
+      }
+       
     }
   )
 }
-*/
+
 export const addToCart = ({ dispatch }, product) => {
   if (product.inventory > 0) {
     dispatch(types.ADD_TO_CART, product.id)
