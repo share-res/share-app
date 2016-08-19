@@ -1,9 +1,10 @@
 
-export const  USER_GETBOOKS = 'USER_GETBOOKS'
+export const  USER_REGISTED = 'USER_REGISTED'
 export const  USER_UPDATEED = 'USER_UPDATEED'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const LOGIN_PASS = 'LOGIN_PASS'
-
+export const ADD_BOOK = 'ADD_BOOK'
+export const RECEIVE_BOOKS = 'RECEIVE_BOOKS'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const CHECKOUT_REQUEST = 'CHECKOUT_REQUEST'
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS'

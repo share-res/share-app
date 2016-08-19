@@ -1,9 +1,9 @@
 <template>
-
+  <ui-container>
     <navbar></navbar>
     <router-view>
     </router-view>
-
+  </ui-container>
 </template>
 
 <script>

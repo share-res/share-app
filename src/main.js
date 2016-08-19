@@ -14,12 +14,12 @@ import App from './components/App'
 import Wilddog  from 'wilddog'
 import WildVue  from 'wildvue'
 
-// 在模块化环境中需要使用 user 安装
-Vue.use(WildVue)
 Vue.use(VueRouter)
-//Vue.use(VueFire)
 Vue.use(VueUiSemantic)
+Vue.use(WildVue)
+
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
+
 const router = new VueRouter( {
   history: true,
   saveScrollPosition: true,
@@ -31,8 +31,8 @@ configRouter(router)
 sync(store, router)
 router.beforeEach((transition) => {
   document.body.scrollTop = 0
-  transition.next()
-/*
+ // transition.next()
+
   let auth_id=store.state.user.auth_id
   if (transition.to.auth) {
     if (!!auth_id) {
@@ -43,7 +43,7 @@ router.beforeEach((transition) => {
     }
   } else {
     transition.next();
-  }*/
+  }
 })
 
 router.start(App, 'body') 

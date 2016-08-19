@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="ui fluid large teal submit button">
-          <ui-button css="basic" @click='updateUserInfo(user)'>
+          <ui-button css="basic" @click='login(user)'>
              <ui-icon css="user">Login</icon>
           </ui-button>
         </div>
@@ -35,7 +35,7 @@
   
 
     <div class="ui message">
-      New to us? <a href="#">Sign Up</a>
+      New to us?  <a class="item" v-link="{ name: 'register'}">Sign U</a>
     </div>
     </form>
   </div>
@@ -46,7 +46,7 @@
 </template>
 <script>
 
-import { updateUserInfo } from '../vuex/actions'
+import { login } from '../vuex/actions'
 
 
 export default {
@@ -63,7 +63,7 @@ export default {
   },*/
   vuex: {
      actions: {
-      updateUserInfo
+      login
     }
    }
   		

@@ -21,7 +21,7 @@ export default {
   components: { ProductList, Cart },
   methods:{
     home(){
-      router.go({ name: 'home', query: { tag: 'all' }})
+      router.go({ name: 'home'})//, query: { tag: 'all' }
     }
   }
  

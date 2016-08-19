@@ -35,6 +35,7 @@ const mutations = {
 
   [CHECKOUT_SUCCESS] (state) {
     state.lastCheckout = 'successful'
+    console.log(this);
   },
 
   [CHECKOUT_FAILURE] (state, savedCartItems) {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './modules/user'
+//import books from './modules/books'
 import cart from './modules/cart'
 import products from './modules/products'
 import createLogger from 'vuex/logger'

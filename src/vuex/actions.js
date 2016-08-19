@@ -1,32 +1,36 @@
 import shop from '../api/shop'
+import db from '../api/db'
 import * as types from './mutation-types'
-import Wilddog from 'wilddog'
-let dbRef = new Wilddog('https://books.wilddogio.com')
 
-export const getMyBooks = ({ dispatch }) => {
-    dispatch(types.USER_GETBOOKS)
- 
+
+export const register = async ({ dispatch },user) => {
+  let uid=await db.register(user)
+  dispatch(types.USER_REGISTED,uid,user)
+
 }
 
-export const updateUserInfo = ({ dispatch,state }, user) => {
-    dispatch(types.USER_UPDATEED,user)
-    login({dispatch,state},user)
-  
-}
-export const login = ({ dispatch ,state},user) => {
-  dbRef.authWithPassword(user,
-    (err,data) => {
-      if(err)
-         dispatch(types.LOGIN_FAILURE)
-      else{
-         // console.log(state.route)
-          let redirect=decodeURIComponent(state.route.query.redirect || '/')
-          dispatch(types.LOGIN_PASS,data.uid,redirect)
- 
-      }
-       
+
+export const login = async ({ dispatch, state}, user) => {
+  try {
+    let data = await db.login(user)
+    if (!data)
+      dispatch(types.LOGIN_FAILURE)
+    else {
+      let redirect = decodeURIComponent(state.route.query.redirect || '/')
+      dispatch(types.LOGIN_PASS, data.uid,user, redirect)
     }
-  )
+  } catch (ex) {
+    console.log(ex)
+    dispatch(types.LOGIN_FAILURE)
+  }
+}
+
+export const  saveBook =(user,book)=>{
+  //console.log(book.title)
+  db.saveBook(user,book)
+ 
+  //console.log(user.auth_id)
+  
 }
 
 export const addToCart = ({ dispatch }, product) => {
