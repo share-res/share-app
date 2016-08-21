@@ -1,5 +1,5 @@
 <template>
-
+    <map></map>
       <ui-menu css="secondary">
         <ui-item>
           <ui-input css="icon">
@@ -26,11 +26,12 @@
 
 <script>
 import Wilddog from 'wilddog'
+import Map from '../components/Map' 
 import Book from '../components/Book'
 
 
 export default {
-  components: { Book},
+  components: { Book,Map},
   data(){
     return {searchQuery:''}
   },

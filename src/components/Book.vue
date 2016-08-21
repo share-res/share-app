@@ -3,13 +3,15 @@
     <ui-content>
       <ui-meta css="right floated">{{item.tags | json }}</ui-meta>
       <ui-header class="header">{{item.title}}</ui-header>
-
+<!--
       <ui-reveal css="small circular fade image">
         <ui-image class="visible content" src="/static/images/user.jpg"></ui-image>
         <ui-image class="hidden content" src="/static/images/image.png"></ui-image>
 
       </ui-reveal>
+      -->
       <ui-description>{{item.description}}.</ui-description>
+      
     </ui-content>
 
     <ui-button css="bottom attached">
@@ -24,9 +26,11 @@
 </template>
 
 <script>
-  
+
+
 export default {
-  props:["item"],
+  props:["item"]
+
   		
 }
 </script>
