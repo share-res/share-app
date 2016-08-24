@@ -29,7 +29,7 @@
         </ui-field>
     
        <ui-button css="basic" @click='addBook'>
-        <ui-icon css="user">Add Book</icon>
+        <ui-icon css="save">保　存</icon>
       </button>
     <ui-form>  
 </template>
@@ -54,10 +54,10 @@ export default {
   },
   methods: {
     addBook() {
-        console.log(this.user)
+       // console.log(this.user)
        saveBook(this.user,this.book)
-     //  this.book.title = ''
-       this.book.description = ''
+       this.book.title = ''
+      // this.book.description = ''
      //  this.book.tags = []
      //  this.book.author = ''
     }

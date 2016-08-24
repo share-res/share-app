@@ -7,18 +7,23 @@ export const register = async ({ dispatch },user) => {
   let uid=await db.register(user)
   dispatch(types.USER_REGISTED,uid,user)
 }
-export const updateUser = async ({ dispatch },user) => {
-  await db.updateUser(user)
+export const updateUser = async ({ dispatch },user_id,user) => {
+  await db.updateUser(user_id,user)
   dispatch(types.USER_UPDATEED,user)
 }
 
 export const requestBook = async ({ dispatch },book,mobile) => {
-  console.log(book)
+ // console.log(book)
   db.requestBook(book['.key'],mobile)
 //  dispatch(types.USER_REGISTED,uid,user)
 
 }
+export const confirmBook = async ({ dispatch },book,state) => {
+  console.log(state)
+  db.confirmBook(book['.key'],state)
+//  dispatch(types.USER_REGISTED,uid,user)
 
+}
 export const login = async ({ dispatch, state}, user) => {
   try {
     let data = await db.login(user)

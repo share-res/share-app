@@ -24,7 +24,7 @@
           </div>
 
           <div class="ui fluid large teal submit button">
-            <ui-button css="basic" @click='updateUser(user)'>
+            <ui-button css="basic" @click='updateUser(user_id,user)'>
               <ui-icon css="user">保　　存</icon>
             </ui-button>
           </div>
@@ -50,7 +50,10 @@ export default {
       }}
    }, 
    vuex: {
-    actions: {
+     getters: {
+      user_id :({ user }) => user.auth_id
+    },
+      actions: {
       updateUser
     }
   }

@@ -41,8 +41,8 @@ export default {
      })
      return uid
    },
-   updateUser:async ({auth_id,mobile,location}) => {
-     let uid=auth_id
+   updateUser:async (user_id,{name,mobile,location}) => {
+     let uid=user_id
      return await dbRef.child(`users/${uid}`).update({
             name:name,
             mobile: mobile,
@@ -66,8 +66,9 @@ export default {
       owner_id: user.auth_id,
       owner:user.name,
       ownerMobile:user.mobile,
+      location:user.location,
       requesterMobile:'',
-      state: 'OK'
+      state: '可借'
     })
     return bookRef
   },
@@ -79,15 +80,20 @@ export default {
   requestBook: (bookid,mobile)=>{
     let key=`books/${bookid}`
     dbRef.child(key).update({
-       state: 'REQ',
+       state: '申请',
        requesterMobile:mobile
      })
   },
-   confirmBook: (bookid)=>{
+   confirmBook: (bookid,result)=>{
     let key=`books/${bookid}`
-    dbRef.child(key).update({
-       state: 'OUT'
-     })
+    let d={state:result=='借出'?'借出':'可借'}
+    if ('借出'===d.state)
+        d.recDate=new Date()
+    else {
+      d.recDate=null
+      d.requesterMobile=''
+    }
+    dbRef.child(key).update(d)
    },
    returnBook: (bookid,mobile)=>{
     let key=`books/${bookid}`

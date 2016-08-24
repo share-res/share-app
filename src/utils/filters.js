@@ -19,25 +19,7 @@ exports.timeToNow = (time) => {
   return str;
 };
 
-exports.transTab = (tab) => {
-  let str;
-  switch (tab) {
-    case 'good':
-      str = '精华';
-      break;
-    case 'share':
-      str = '分享';
-      break;
-    case 'job':
-      str = '招聘';
-      break;
-    case 'ask':
-      str = '问答';
-      break;
-    default:
-  }
-  return str;
-};
+
 
 
 exports.formatDate =  time => {

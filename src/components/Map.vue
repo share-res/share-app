@@ -55,10 +55,10 @@ export default {
                 zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
                 animateEnable:true
              })
-             AMap.event.addListener(geolocation, 'complete', (data) => {
+            /* AMap.event.addListener(geolocation, 'complete', (data) => {
                     self.location.longitude=data.position.getLng()
                     self.location.latitude=data.position.getLat()
-              })
+              })*/
            //  AMap.event.addListener(geolocation, 'error', ()=>{self.tip='定位失败'})      //返回定位出错信息
              map.addControl(geolocation)
              geolocation.getCurrentPosition() 

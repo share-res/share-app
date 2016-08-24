@@ -3,7 +3,7 @@
   <div>
     
     <ui-accordion css="styled fluid">
-      <ui-title><ui-icon css="dropdown">===Add New Book===</ui-icon></ui-title>
+      <ui-title><ui-icon css="dropdown">===新增图书资料===</ui-icon></ui-title>
       <ui-content><add-book></add-book></ui-content>
      
     </ui-accordion>
@@ -25,15 +25,10 @@ import { myBooks } from '../vuex/getters'
 
 export default {
   components: { AddBook,Book},
-  data(){
-     return {
-       gridColumns: ['title', 'price','state'],
-     }
-  },
   wilddog: {
      books: new Wilddog('https://books.wilddogio.com/books')
   },
-   vuex: {
+  vuex: {
     getters: {
       user_id :({ user }) => user.auth_id
     }
