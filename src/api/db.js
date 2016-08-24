@@ -74,13 +74,14 @@ export default {
   },
   fetchUser: (uid)=>{
     let key=`users/${uid}`
-    console.log(key)
+    //console.log(key)
     return fetch(key)
   },
-  requestBook: (bookid,mobile)=>{
+  requestBook: (bookid,requester,mobile)=>{
     let key=`books/${bookid}`
     dbRef.child(key).update({
        state: '申请',
+       requester:requester,
        requesterMobile:mobile
      })
   },

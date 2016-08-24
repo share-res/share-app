@@ -12,9 +12,9 @@ export const updateUser = async ({ dispatch },user_id,user) => {
   dispatch(types.USER_UPDATEED,user)
 }
 
-export const requestBook = async ({ dispatch },book,mobile) => {
+export const requestBook = async ({ dispatch },book,requester,mobile) => {
  // console.log(book)
-  db.requestBook(book['.key'],mobile)
+  db.requestBook(book['.key'],requester,mobile)
 //  dispatch(types.USER_REGISTED,uid,user)
 
 }

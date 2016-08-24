@@ -7,10 +7,10 @@
       <ui-content>{{{item.description}}}
        <br>
 
-      <ui-button v-if="user_id&&item.state=='可借'&&item.owner_id!=user_id" @click="requestBook(item,mobile)">求借</ui-button>
+      <ui-button v-if="user_id&&item.state=='可借'&&item.owner_id!=user_id" @click="requestBook(item,userName,mobile)">求借</ui-button>
       <br>
       <div v-if="item.owner_id===user_id&&''!=item.requesterMobile">
-        <label>请求者：{{user_name}}[{{item.requesterMobile}}]--{{item.recDate | timeToNow}}</label>
+        <label>请求者：{{item.requester}}[{{item.requesterMobile}}]--{{item.recDate | timeToNow}}</label>
         <br>
        
         <br>
@@ -38,7 +38,7 @@ export default {
   vuex: {
     getters: {
       user_id :({ user }) => user.auth_id,
-      user_name :({ user }) => user.name,
+      userName :({ user }) => user.name,
       mobile :({ user }) => user.mobile
     },
     actions: {
