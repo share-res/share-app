@@ -1,27 +1,38 @@
 <template>
-    <map></map>
-      <ui-menu css="secondary">
-        <ui-item>
-          <ui-input css="icon">
-            <input type="text"  placeholder="Search..." name="query" v-model="searchQuery">
-            <ui-icon css="search link"></ui-icon>
-          </ui-input>
-        </ui-item>
-    
-  
-       <ui-item v-for="tag in tags"> 
-           <ui-checkbox css="radio">
-             <input type="radio" value="{{tag['.value']}}" v-model="searchQuery">
-             <label>{{tag['.value']}}</label>
-           </ui-checkbox>
 
-       </ui-item>
- 
-    </ui-menu>  
-    <ui-divider></ui-divider>
-    <ui-cards>
-        <book v-for="item in books | filterBy searchQuery" track-by=".key" :item='item'></book>
-    </ui-cards>
+
+
+  <ui-menu css="secondary">
+    <ui-item>
+      <ui-input css="icon">
+        <input type="text" placeholder="Search..." name="query" v-model="searchQuery">
+        <ui-icon css="search link"></ui-icon>
+      </ui-input>
+    </ui-item>
+  <ui-item> 分类：</ui-item>
+ <ui-dropdown  css="fluid normal selection" >
+     <input type="hidden"  v-model="searchQuery">
+      <ui-icon css="dropdown"></ui-icon>
+      <ui-text css="default">请选择</ui-text>
+        <ui-menu class="menu">
+            <ui-item  v-for="tag in tags" data-value="{{tag['.value']}}">{{tag['.value']}}</ui-item>
+        </ui-menu>
+      </ui-dropdown>
+  <!--  <ui-item v-for="tag in tags">
+      <ui-checkbox css="radio">
+        <input type="radio" value="{{tag['.value']}}" v-model="searchQuery">
+        <label>{{tag['.value']}}</label>
+      </ui-checkbox>
+      -->
+
+  
+
+  </ui-menu>
+  <ui-divider></ui-divider>
+  <book v-for="item in books | filterBy searchQuery" track-by=".key" :item='item'></book>
+  <ui-divider></ui-divider>
+
+
 </template>
 
 <script>
@@ -39,5 +50,7 @@ export default {
      books: new Wilddog('https://books.wilddogio.com/books'),
      tags: new Wilddog('https://books.wilddogio.com/tags')
   }
+  
+
 }
 </script>

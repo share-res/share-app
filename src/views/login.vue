@@ -4,7 +4,7 @@
   <div class="column">
     <h2 class="ui teal image header">
         <div class="content">
-        Log-in to your account
+        登录系统
       </div>
     </h2>
    
@@ -25,7 +25,7 @@
         </div>
         <div class="ui fluid large teal submit button">
           <ui-button css="basic" @click='login(user)'>
-             <ui-icon css="user">Login</icon>
+             <ui-icon css="user">登　录</icon>
           </ui-button>
         </div>
       </div>
@@ -35,7 +35,7 @@
   
 
     <div class="ui message">
-      New to us?  <a class="item" v-link="{ name: 'register'}">Sign U</a>
+      还未注册?  <a class="item" v-link="{ name: 'register'}">注　册</a>
     </div>
     </form>
   </div>

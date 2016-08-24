@@ -1,93 +1,53 @@
 import Wilddog from 'wilddog'
+import LRU from 'lru-cache'
 let dbRef = new Wilddog('https://books.wilddogio.com')
+const cache =LRU({
+    max: 1000,
+    maxAge: 1000 * 60 * 60 // 60 min cache
+})
 
-let _books = []
-let _users = []
-/**
- * Check if a value is an object.
- *
- * @param {*} val
- * @return {boolean}
- */
-function isObject (val) {
-  return Object.prototype.toString.call(val) === '[object Object]'
-}
 
-/**
- * Convert wilddog snapshot into a bindable data record.
- *
- * @param {WilddogSnapshot} snapshot
- * @return {Object}
- */
-function createRecord (snapshot) {
-  var value = snapshot.val()
-  var res = isObject(value)
-    ? value
-    : { '.value': value }
-  res['.key'] = snapshot.key()
-  //console.log(res)
-  return res
-}
-/**
- * Find the index for an object with given key.
- *
- * @param {array} array
- * @param {string} key
- * @return {number}
- */
-function indexForKey (array, key) {
-  for (var i = 0; i < array.length; i++) {
-    if (array[i]['.key'] === key) {
-      return i
-    }
+function fetch (child) {
+  if (cache && cache.has(child)) {
+    return Promise.resolve(cache.get(child))
+  } else {
+    return new Promise((resolve, reject) => {
+      dbRef.child(child).once('value', snapshot => {
+        const val = snapshot.val()
+        console.log(val)
+        // mark the timestamp when this item is cached
+        val.__lastUpdated = Date.now()
+        cache && cache.set(child, val)
+        resolve(val)
+      }, reject)
+    })
   }
-  /* istanbul ignore next */
-  return -1
 }
 
-function bindAsArray (src,array) {
-   let source=dbRef.child(src)
-   let onAdd = source.on('child_added', function (snapshot, prevKey) {
-   let index = prevKey ? indexForKey(array, prevKey) + 1 : 0
-    array.splice(index, 0, createRecord(snapshot))
-
-  })
-
-  let onRemove = source.on('child_removed', function (snapshot) {
-    let index = indexForKey(array, snapshot.key())
-    array.splice(index, 1)
-
-  })
-
-  let onChange = source.on('child_changed', function (snapshot) {
-    let index = indexForKey(array, snapshot.key())
-    array.splice(index, 1, createRecord(snapshot))
-
-  })
-
-  let onMove = source.on('child_moved', function (snapshot, prevKey) {
-    let index = indexForKey(array, snapshot.key())
-    let record = array.splice(index, 1)[0]
-    let newIndex = prevKey ? indexForKey(array, prevKey) + 1 : 0
-    array.splice(newIndex, 0, record)
-  })
-}
-
-//bindAsArray('books',_books)
 export default {
   //books:_books,
   login:async ({email,password}) => {
       return await dbRef.authWithPassword({email,password})
   },
-  register:async ({email,password,mobile,location}) => {
+  register:async ({name,email,password,mobile,location}) => {
+    // console.log('db',name) 
      await dbRef.createUser({email,password})
-     //cosole.log(d1)
      let authData=await dbRef.authWithPassword({email,password})
-     await dbRef.child('users').update({
-       [`"${mobile}"`]: {email,location,state:'OK'}
-       //[`${uid}`]: {mobile,location,state:'OK'}
+     //console.log(authData.uid)
+     let uid=authData.uid
+      await dbRef.child('users').update({
+       //[`"${mobile}"`]: {email,location,state:'OK'}
+       [`${uid}`]: {name,mobile,location,state:'OK'}
      })
-     return  authData.uid
+     return uid
+   },
+   updateUser:async ({auth_id,mobile,location}) => {
+     let uid=auth_id
+     return await dbRef.child(`users/${uid}`).update({
+            name:name,
+            mobile: mobile,
+            location:location
+     })
    },
   /**
  * changePassword ( credentials )
@@ -101,15 +61,41 @@ export default {
   saveBook:async (user,book) => {
       let bookRef = await dbRef.child('books').push({
       title: book.title,
-      price: book.price,
       tags: book.tags,
       description:book.description,
       owner_id: user.auth_id,
+      owner:user.name,
+      ownerMobile:user.mobile,
+      requesterMobile:'',
       state: 'OK'
     })
     return bookRef
   },
- 
+  fetchUser: (uid)=>{
+    let key=`users/${uid}`
+    console.log(key)
+    return fetch(key)
+  },
+  requestBook: (bookid,mobile)=>{
+    let key=`books/${bookid}`
+    dbRef.child(key).update({
+       state: 'REQ',
+       requesterMobile:mobile
+     })
+  },
+   confirmBook: (bookid)=>{
+    let key=`books/${bookid}`
+    dbRef.child(key).update({
+       state: 'OUT'
+     })
+   },
+   returnBook: (bookid,mobile)=>{
+    let key=`books/${bookid}`
+    dbRef.child(key).update({
+       state: 'OK',
+       requesterMobile:''
+     })
+   }
 }
 /*
  created: function () {

@@ -9,20 +9,22 @@
     </ui-accordion>
   
     <ui-divider></ui-divider>
-    <data-grid :data="books | filterBy owner_id" :columns="gridColumns" :filter-key="">
-    </data-grid>
+    <book v-for="item in books | filterBy user_id" track-by=".key" :item='item'></book>
+   <!-- <data-grid :data="books | filterBy owner_id" :columns="gridColumns" :filter-key="">
+    </data-grid>-->
   </div>
 </template>
 
 <script>
 import Wilddog from 'wilddog'
 import AddBook from '../components/AddBook'
-import DataGrid from '../components/DataGrid'
+//import DataGrid from '../components/DataGrid'
+import Book from '../components/Book'
 import { myBooks } from '../vuex/getters'
 
 
 export default {
-  components: { AddBook,DataGrid},
+  components: { AddBook,Book},
   data(){
      return {
        gridColumns: ['title', 'price','state'],
@@ -33,8 +35,20 @@ export default {
   },
    vuex: {
     getters: {
-      owner_id :({ user }) => user.auth_id
+      user_id :({ user }) => user.auth_id
     }
+   },
+   methods:{
+     mybooks:()=>{
+       let data=[]
+       for (let d of this.books){
+         if (d.owner_id===this.user_id){
+           data.push(d)
+           console.log(d)
+         }
+       }
+       return data
+     }
    }
 
 

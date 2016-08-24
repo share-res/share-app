@@ -4,46 +4,49 @@
     <div class="column">
       <h2 class="ui teal image header">
         <div class="content">
-          Sign up your account
+          注册新帐户
         </div>
       </h2>
-
+      <map :location.sync='user.location'></map>
       <form class="ui large form">
         <div class="ui stacked segment">
           <div class="field">
             <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" name="email" v-model="user.email" placeholder="E-mail address">
+             <ui-label>电子邮件：</ui-label>
+              <input type="text" name="email" v-model="user.email" placeholder="例如：alex@139.com，用于密码重置">
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="password" name="password" v-model="user.password" placeholder="Password">
+              <ui-label>密　　码：</ui-label>
+              <input type="password" name="password" v-model="user.password" placeholder="6~10位">
             </div>
           </div>
+          
           <div class="field">
             <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="text" name="mobile" v-model="user.mobile" placeholder="mobile number">
+              <ui-label>用户昵称：</ui-label>
+              <input type="text" name="name" v-model="user.name" placeholder="显示为书的拥有者">
             </div>
           </div>
+
           <div class="field">
             <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="text" name="location" v-model="user.location" placeholder="live location">
+              <ui-label>手机号码：</ui-label>
+              <input type="text" name="mobile" v-model="user.mobile" placeholder="十分重要，请认真核对">
             </div>
           </div>
+  
           <div class="ui fluid large teal submit button">
             <ui-button css="basic" @click='register(user)'>
-              <ui-icon css="user">Sign Up</icon>
+              <ui-icon css="user">注　册</icon>
             </ui-button>
           </div>
         </div>
 
         <div class="ui error message"></div>
         <div class="ui message">
-          alredy? <a class="item" v-link="{ name: 'login'}">Login</a>
+          已经注册过? <a class="item" v-link="{ name: 'login'}">登　录</a>
         </div>
       </form>
     </div>
@@ -55,20 +58,15 @@
 <script>
 
 import { register } from '../vuex/actions'
-
-
+import Map from '../components/Map' 
 export default {
+   components:{Map},
    data: ()=>{
-      return {user:{email:'demo@163.com',password:'demo',mobile:'13911123456',location:'广州市海珠区'}}
+      return {user:{name:'',email:'',password:'',mobile:'',
+        location:{longitude:113.28, latitude:23.09}
+      }}
    }, 
-  /*route: {
-    data: ({ to}) => {
-       console.log('login route data')
-       return {}
-      }
-    }
-  },*/
-  vuex: {
+   vuex: {
      actions: {
       register
     }

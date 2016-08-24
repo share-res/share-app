@@ -46,7 +46,7 @@ router.beforeEach((transition) => {
   }
 })
 
-router.start(App, '#app') 
+router.start(App, 'body') 
 window.router = router
 //router.go({ name: 'myBooks'})
 

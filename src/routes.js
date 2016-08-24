@@ -4,6 +4,11 @@ export default function (router) {
       name: 'register',
       component: require('./views/register.vue'),
     },
+     '/setting': {
+      auth: true,
+      name: 'setting',
+      component: require('./views/setting.vue'),
+    },
     '/login': {
       name: 'login',
       component: require('./views/login.vue'),
@@ -16,10 +21,6 @@ export default function (router) {
       auth: true,
       name: 'myBooks', 
       component: require('./views/myBooks.vue')
-    },
-    '/demo': {
-      name: 'demo', 
-      component: require('./views/Demo')
     },
      '*': {
       component: require('./views/404')

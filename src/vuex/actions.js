@@ -1,23 +1,35 @@
-import shop from '../api/shop'
 import db from '../api/db'
 import * as types from './mutation-types'
 
 
 export const register = async ({ dispatch },user) => {
+  console.log('register',user.name) 
   let uid=await db.register(user)
   dispatch(types.USER_REGISTED,uid,user)
-
+}
+export const updateUser = async ({ dispatch },user) => {
+  await db.updateUser(user)
+  dispatch(types.USER_UPDATEED,user)
 }
 
+export const requestBook = async ({ dispatch },book,mobile) => {
+  console.log(book)
+  db.requestBook(book['.key'],mobile)
+//  dispatch(types.USER_REGISTED,uid,user)
+
+}
 
 export const login = async ({ dispatch, state}, user) => {
   try {
     let data = await db.login(user)
+// console.log(user)
+    let userInfo=await db.fetchUser(data.uid)
+    console.log(userInfo)
     if (!data)
       dispatch(types.LOGIN_FAILURE)
     else {
       let redirect = decodeURIComponent(state.route.query.redirect || '/')
-      dispatch(types.LOGIN_PASS, data.uid,user, redirect)
+      dispatch(types.LOGIN_PASS, data.uid,userInfo, redirect)
     }
   } catch (ex) {
     console.log(ex)
@@ -27,30 +39,9 @@ export const login = async ({ dispatch, state}, user) => {
 
 export const  saveBook =(user,book)=>{
   //console.log(book.title)
+  //book.owner=user.name
   db.saveBook(user,book)
  
   //console.log(user.auth_id)
   
-}
-
-export const addToCart = ({ dispatch }, product) => {
-  if (product.inventory > 0) {
-    dispatch(types.ADD_TO_CART, product.id)
-  }
-}
-
-export const checkout = ({ dispatch, state }, products) => {
-  const savedCartItems = [...state.cart.added]
-  dispatch(types.CHECKOUT_REQUEST)
-  shop.buyProducts(
-    products,
-    () => dispatch(types.CHECKOUT_SUCCESS),
-    () => dispatch(types.CHECKOUT_FAILURE, savedCartItems)
-  )
-}
-
-export const getAllProducts = ({ dispatch }) => {
-  shop.getProducts(products => {
-    dispatch(types.RECEIVE_PRODUCTS, products)
-  })
 }

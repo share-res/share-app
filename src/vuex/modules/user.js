@@ -7,22 +7,36 @@ import {
 // initial state
 const state = {
   auth_id: null,
+  name:'',
   email: '',
   password: '',
   mobile:'',
-  location:''
+  location:{}
 }
-function sync({email,password,mobile,location}){
+function sync({name,email,password,mobile,location}){
     state.email = email
+    state.name = name
     state.password = password
     state.mobile = mobile
-    state.location = location
+    if (!location|| 'string'===typeof location){
+        state.location={longitude:113.28, latitude:23.09}
+    }
+    else{
+      state.location = location
+    }
 }
 const mutations = {
 
   USER_REGISTED(sate, uid,user) {
      state.auth_id = uid
+    // console.log(uid)
      sync(user)
+     window.router.go('/myBooks')
+  },
+  USER_UPDATEED(sate, user) {
+     state.mobile = user.mobile
+     state.name = user.name
+     state.location = user.location
      window.router.go('/myBooks')
   },
   [LOGIN_PASS](state, uid,user, redirect) {
