@@ -37,11 +37,10 @@
             </div>
           </div>
   
-          <div class="ui fluid large teal submit button">
-            <ui-button css="basic" @click='register(user)'>
+           <ui-button css="ui primary button" @click='register(user)'>
               <ui-icon css="user">注　册</icon>
             </ui-button>
-          </div>
+
         </div>
 
         <div class="ui error message"></div>

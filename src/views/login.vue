@@ -1,47 +1,44 @@
 <template>
 
-<div class="ui middle aligned center aligned grid">
-  <div class="column">
-    <h2 class="ui teal image header">
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui teal image header">
         <div class="content">
-        登录系统
-      </div>
-    </h2>
-   
-    <form class="ui large form">
-  
-      <div class="ui stacked segment">
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="user icon"></i>
-            <input type="text" name="email" v-model="user.email" placeholder="E-mail address">
-          </div>
+          登录系统
         </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="lock icon"></i>
-            <input type="password" name="password" v-model="user.password" placeholder="Password">
+      </h2>
+
+      <form class="ui large form">
+
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="email" v-model="user.email" placeholder="E-mail address">
+            </div>
           </div>
-        </div>
-        <div class="ui fluid large teal submit button">
-          <ui-button css="basic" @click='login(user)'>
-             <ui-icon css="user">登　录</icon>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" v-model="user.password" placeholder="Password">
+            </div>
+          </div>
+
+          <ui-button css="ui primary button" @click='login(user)'>
+            <ui-icon css="user">登　录</icon>
           </ui-button>
+
         </div>
-      </div>
 
-      <div class="ui error message"></div>
-
-  
-
-    <div class="ui message">
-      还未注册?  <a class="item" v-link="{ name: 'register'}">注　册</a>
+        <div class="ui error message"></div>
+        <div class="ui message">
+          还未注册? <a class="item" v-link="{ name: 'register'}">注　册</a>
+        </div>
+      </form>
     </div>
-    </form>
   </div>
-</div>
 
-</body>
+  </body>
 
 </template>
 <script>
@@ -70,9 +67,7 @@ export default {
 }
 </script>
 <style scoped>
-h2 {
-  color: #42b983;
-}
+  h2 {
+    color: #42b983;
+  }
 </style>
-
-

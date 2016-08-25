@@ -48,38 +48,5 @@ router.beforeEach((transition) => {
 
 router.start(App, 'body') 
 window.router = router
-//router.go({ name: 'myBooks'})
-
-/*
-ref.createUser({email:"Loki@asgard.com",password:"examplepassword"},
-  function(err,data){
-  if(err!=null){
-    //not success
-  } else {
-    //create user success
-  }
-});
-
-ref.unauth();
-function authHandler(error, authData) {
-  if (error) {
-      console.log("Login Failed!", error);
-  } else {
-      console.log("Authenticated successfully with payload:", authData);
-  }
-}
-
-var ref = new Wilddog("https://<appId>.wilddogio.com");
-var authData = ref.getAuth();
-if (authData) {
-  console.log("User " + authData.uid + " is logged in with " + authData.provider);
-} else {
-  console.log("User is logged out");
-}
-ref.authWithPassword({
-    email    : 'Loki@asgard.com',
-    password : 'dwadwadc'
-}, authHandler);
-
-*/
+router.go({ name: 'about'})
 

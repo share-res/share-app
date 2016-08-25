@@ -5,7 +5,7 @@
         <ui-field>
           <label>分类</label>
           <ui-dropdown  css="fluid multiple search normal selection" :setting="{maxSelections:2}">
-          <input type="hidden" name="country" v-model="book.tags">
+          <input type="hidden" name="tags" v-model="book.tags">
           <ui-icon css="dropdown"></ui-icon>
           <ui-text css="default">请选择</ui-text>
           <ui-menu class="menu">
@@ -24,11 +24,11 @@
       </ui-fields>
      
        <ui-field>
-          <label>描述(可以把推荐人以及书的作者写在前面)</label>
+          <label>描述(&lt;br&gt;换行　&lt;img src="http:/you/com/name.jpg"&gt;)</label>
            <input type="text" v-model="book.description" placeholder="Book Description">
         </ui-field>
     
-       <ui-button css="basic" @click='addBook'>
+        <ui-button css="ui primary button" @click='addBook'>
         <ui-icon css="save">保　存</icon>
       </button>
     <ui-form>  

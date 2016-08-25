@@ -23,12 +23,10 @@
             </div>
           </div>
 
-          <div class="ui fluid large teal submit button">
-            <ui-button css="basic" @click='updateUser(user_id,user)'>
+          <ui-button css="ui primary button" @click='updateUser(user_id,user)'>
               <ui-icon css="user">保　　存</icon>
             </ui-button>
-          </div>
-        </div>
+           </div>
 
         <div class="ui error message"></div>
  

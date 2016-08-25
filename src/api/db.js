@@ -58,11 +58,24 @@ export default {
   changePassword:async (credentials) => {
       return await dbRef.changePassword(credentials)
   },
+  updateBook:async (book) => {
+    let id=book['.key']
+     let key=`books/${id}`
+     console.log('api',key)
+     let err = await dbRef.child(key).update({
+      title: book.title,
+      author:book.author,
+      tags: book.tags,
+      description:book.description
+    })
+    return err
+  },
   saveBook:async (user,book) => {
       let bookRef = await dbRef.child('books').push({
       title: book.title,
       tags: book.tags,
       description:book.description,
+      author:book.author,
       owner_id: user.auth_id,
       owner:user.name,
       ownerMobile:user.mobile,
@@ -95,13 +108,6 @@ export default {
       d.requesterMobile=''
     }
     dbRef.child(key).update(d)
-   },
-   returnBook: (bookid,mobile)=>{
-    let key=`books/${bookid}`
-    dbRef.child(key).update({
-       state: 'OK',
-       requesterMobile:''
-     })
    }
 }
 /*

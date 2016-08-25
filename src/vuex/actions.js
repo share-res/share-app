@@ -33,7 +33,7 @@ export const login = async ({ dispatch, state}, user) => {
     if (!data)
       dispatch(types.LOGIN_FAILURE)
     else {
-      let redirect = decodeURIComponent(state.route.query.redirect || '/')
+      let redirect = decodeURIComponent(state.route.query.redirect || 'home')
       dispatch(types.LOGIN_PASS, data.uid,userInfo, redirect)
     }
   } catch (ex) {
@@ -42,11 +42,15 @@ export const login = async ({ dispatch, state}, user) => {
   }
 }
 
+
 export const  saveBook =(user,book)=>{
-  //console.log(book.title)
-  //book.owner=user.name
   db.saveBook(user,book)
- 
-  //console.log(user.auth_id)
-  
+}
+
+export const  updateBook= ({dispatch, state}, book) => {
+  console.log('action',book.tags)
+  db.updateBook(book).then((err)=>{
+    if (!err)
+       dispatch(types.BOOK_UPDATE_OK)
+  })
 }

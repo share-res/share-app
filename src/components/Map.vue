@@ -15,10 +15,6 @@ export default {
       default:  ()=>{
         return {longitude:113.28, latitude:23.09}
       }
-    },
-    canSetLocation: {
-      type: Boolean,
-      default: ()=>false
     }
   },
   ready () {
@@ -44,8 +40,6 @@ export default {
       
         map.plugin(['AMap.ToolBar','AMap.Geolocation'], function() {
 		         map.addControl(new AMap.ToolBar())
-           //  let  cs=new AMap.CitySearch()
-           //  map.addControl(cs)
              let  geolocation = new AMap.Geolocation({
                 showButton: false,        //显示定位按钮，默认：true
                 showCircle: false,   
@@ -62,10 +56,7 @@ export default {
            //  AMap.event.addListener(geolocation, 'error', ()=>{self.tip='定位失败'})      //返回定位出错信息
              map.addControl(geolocation)
              geolocation.getCurrentPosition() 
-           /*  cs.getLocalCity((status,result)=>{
-                console.log(status)
-                console.log(result)
-             })*/
+      
         })
        
         

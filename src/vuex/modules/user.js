@@ -1,6 +1,10 @@
 import {
   LOGIN_FAILURE,
-  LOGIN_PASS
+  LOGIN_PASS,
+  USER_REGISTED,
+  USER_UPDATEED,
+  BOOK_UPDATE_OK
+ 
 } from '../mutation-types'
 
 
@@ -52,6 +56,9 @@ const mutations = {
   [LOGIN_FAILURE](state) {
     state.auth_id = null
     console.log('LOGIN_FAILURE')
+  },
+  [BOOK_UPDATE_OK](state) {
+     console.log('BOOK_UPDATE_OK')
   }
 }
 

@@ -13,9 +13,13 @@ export default function (router) {
       name: 'login',
       component: require('./views/login.vue'),
     },
-    '/': {
+    '/home': {
       name: 'home',
-      component: require('./views/listBooks.vue')
+      component: require('./views/allBooks.vue')
+    },
+    '/': {
+      name: 'about',
+      component: require('./views/about.vue')
     },
     '/myBooks': {
       auth: true,
