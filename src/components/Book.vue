@@ -5,10 +5,10 @@
       <label v-if="!!user_id">----拥有人：{{item.owner}}[{{item.ownerMobile}}] <label>
       </ui-title>
       <ui-content>
-    
+       <ui-button css="ui primary button"  @click="showMap()">定　位</ui-button>
   <div v-if="item.owner_id===user_id">
       <edit-book :book='item'></edit-book>
-  <br>
+      <br>
       <div v-if="item.owner_id===user_id&&''!=item.requesterMobile">
         <ui-label>请求者：{{item.requester}}[{{item.requesterMobile}}]--{{item.recDate | timeToNow}}</ui-label>
         <br>
@@ -19,7 +19,7 @@
         </select>-->
          <br>
         <ui-button v-if="item.state==='申请'" css="ui primary button" @click="confirmBook(item,'借出')">借　出</ui-button>
-         <ui-button css="ui primary button" style='margin-left:2em;' @click="confirmBook(item,'可借')">可　借</ui-button>
+         <ui-button css="ui primary button" style='margin-left:2em;' @click="confirmBook(item,'可借')">可　用</ui-button>
       </div>
   </div>
   <div v-else>
@@ -29,7 +29,7 @@
        <br>
 　　　　{{{item.description}}}
        <br>
-       <ui-button css="ui primary button"  @click="showMap()">定　位</ui-button>
+      
        <br>
        <ui-button css="ui primary button"  v-if="user_id&&item.state=='可借'" @click="requestBook(item,userName,mobile)">申　请</ui-button>
  </div>
@@ -42,9 +42,9 @@
 
 <script>
 import { requestBook,confirmBook } from '../vuex/actions'
-
+import EditBook from '../components/EditBook'
 export default {
-
+  components: { EditBook},
   props:["item",'dimmer'],
   
   methods: {

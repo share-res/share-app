@@ -1,5 +1,5 @@
 <template>
-
+  <map-book v-ref:bookmap></map-book>
   <div>
     
     <ui-accordion css="styled fluid">
@@ -20,11 +20,17 @@ import Wilddog from 'wilddog'
 import AddBook from '../components/AddBook'
 //import DataGrid from '../components/DataGrid'
 import Book from '../components/Book'
+import MapBook from '../components/MapBook'
 import { myBooks } from '../vuex/getters'
 
 
 export default {
-  components: { AddBook,Book},
+  components: { AddBook,Book,MapBook},
+   events: {
+    'show-book-on-map': function (book) {
+       this.$refs.bookmap.display(book)
+    }
+  },
   wilddog: {
      books: new Wilddog('https://books.wilddogio.com/books')
   },
