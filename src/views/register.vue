@@ -19,7 +19,7 @@
           <div class="field">
             <div class="ui left icon input">
               <ui-label>密　　码：</ui-label>
-              <input type="password" name="password" v-model="user.password" placeholder="6~10位">
+              <input type="password" name="password" v-model="user.password" placeholder="请输入4-10位长度的字母或数字作为密码">
             </div>
           </div>
           
@@ -37,17 +37,18 @@
             </div>
           </div>
   
-           <ui-button css="ui primary button" @click='register(user)'>
+           <ui-button css="large primary button" @click='register(user)'>
               <ui-icon css="user">注　册</icon>
             </ui-button>
 
         </div>
 
         <div class="ui error message"></div>
+    
+      </form>
         <div class="ui message">
           已经注册过? <a class="item" v-link="{ name: 'login'}">登　录</a>
         </div>
-      </form>
     </div>
   </div>
 
@@ -69,6 +70,41 @@ export default {
      actions: {
       register
     }
-   }
+   },
+    ready() {
+      $('.ui.form')
+        .form({
+          on: 'blur',
+          fields: {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : '密码不能为空'
+                },
+                {
+                  type   : 'email',
+                  prompt : '电子邮箱格式错误，正确格式：yourname@abc.com'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : '密码不能为空'
+                },
+                {
+                  type   : 'length[4]',
+                  prompt : '密码长度应大于4位字符'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    }
   		
 }

@@ -36,18 +36,16 @@ export default {
      //console.log(authData.uid)
      let uid=authData.uid
       await dbRef.child('users').update({
-       //[`"${mobile}"`]: {email,location,state:'OK'}
-       [`${uid}`]: {name,mobile,location,state:'OK'}
+           [`${uid}`]: {name,mobile,location,state:'OK'}
      })
      return uid
    },
    updateUser:async (user_id,{name,mobile,location}) => {
      let uid=user_id
-     return await dbRef.child(`users/${uid}`).update({
-            name:name,
-            mobile: mobile,
-            location:location
-     })
+     let user={location}
+     if (name!='') user.name=name
+     if (mobile!='') user.mobile=mobile
+     return await dbRef.child(`users/${uid}`).update(user)
    },
   /**
  * changePassword ( credentials )

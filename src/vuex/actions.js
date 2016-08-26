@@ -27,7 +27,7 @@ export const confirmBook = async ({ dispatch },book,state) => {
 export const login = async ({ dispatch, state}, user) => {
   try {
     let data = await db.login(user)
-// console.log(user)
+    console.log(user)
     let userInfo=await db.fetchUser(data.uid)
     console.log(userInfo)
     if (!data)

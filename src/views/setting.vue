@@ -13,17 +13,17 @@
           <div class="field">
             <div class="ui left icon input">
               <ui-label>手机号码：</ui-label>
-              <input type="text" name="mobile" v-model="user.mobile" placeholder="十分重要，请认真核对">
+              <input type="text" name="mobile" v-model="info.mobile" placeholder="不填写将不修改原有信息">
             </div>
           </div>
          <div class="field">
             <div class="ui left icon input">
               <ui-label>用户昵称：</ui-label>
-              <input type="text" name="name" v-model="user.name" placeholder="显示为书的拥有者">
+              <input type="text" name="name" v-model="info.name" placeholder="不填写将不修改原有信息">
             </div>
           </div>
 
-          <ui-button css="ui primary button" @click='updateUser(user_id,user)'>
+          <ui-button css="ui primary button" @click='updateUser(user.auth_id,info)'>
               <ui-icon css="user">保　　存</icon>
             </ui-button>
            </div>
@@ -43,14 +43,23 @@ import { updateUser } from '../vuex/actions'
 import Map from '../components/Map' 
 export default {
    components:{Map},
-   data: ()=>{
-      return {user:{mobile:'',name:'',location:{longitude:113.28, latitude:23.09}
-      }}
-   }, 
+   data(){
+      return {
+        info:{
+          mobile:'',
+          name:'',
+          location:{longitude:113.28, latitude:23.09}
+        }
+      }
+   },
+  ready(){
+     this.info.name=this.user.name
+     this.info.mobile=this.user.mobile
+   },
    vuex: {
      getters: {
-      user_id :({ user }) => user.auth_id
-    },
+      user :({ user }) => user
+     },
       actions: {
       updateUser
     }

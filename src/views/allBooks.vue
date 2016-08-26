@@ -15,7 +15,7 @@
 
 
   <ui-divider></ui-divider>
-  <book v-for="item in books | filterBy searchQuery" track-by=".key" :item='item' :dimmer='$refs.mydimmer'></book>
+  <book v-for="item in books | filterBy searchQuery" track-by=".key" :item='item' ></book>
   <ui-divider></ui-divider>
 
 

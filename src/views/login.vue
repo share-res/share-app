@@ -14,27 +14,30 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="email" v-model="user.email" placeholder="E-mail address">
+              <input type="text" name="email" v-model="user.email" placeholder="例如:alex@139.com">
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input type="password" name="password" v-model="user.password" placeholder="Password">
+              <input type="password" name="password" v-model="user.password" placeholder="请输入4-10位长度的字母或数字作为密码">
             </div>
           </div>
 
-          <ui-button css="ui primary button" @click='login(user)'>
-            <ui-icon css="user">登　录</icon>
-          </ui-button>
+          <!--<ui-button css="ui primary button" @click='login(user)'>
+            <ui-icon css="user">登　录</icon> fluid 
+          </ui-button>-->
+           <div class="ui  large primary button" @click='login(user)'>登　录</div>
 
         </div>
-
-        <div class="ui error message"></div>
-        <div class="ui message">
+         <div id="errmsg" class="ui error message"></div>
+    
+      
+      </form>
+         <div class="ui message">
+          <p v-show='userInfo.message!=""' >{{userInfo.message}}</p>
           还未注册? <a class="item" v-link="{ name: 'register'}">注　册</a>
         </div>
-      </form>
     </div>
   </div>
 
@@ -48,8 +51,43 @@ import { login } from '../vuex/actions'
 
 export default {
    data: ()=>{
-      return {user:{email:'test@139.com',password:'test'}}
-   }, 
+      return {user:{email:'',password:''}} //test@139.com
+   },
+   ready() {
+      $('.ui.form')
+        .form({
+          on: 'blur',
+          fields: {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : '密码不能为空'
+                },
+                {
+                  type   : 'email',
+                  prompt : '电子邮箱格式错误，正确格式：yourname@abc.com'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : '密码不能为空'
+                },
+                {
+                  type   : 'length[4]',
+                  prompt : '密码长度应大于4位字符'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    },
   /*route: {
     data: ({ to: { query: { redirect }}}) => {
        console.log('login route data')
@@ -58,7 +96,10 @@ export default {
       return {redirect:redirect2,user:{email:'test@139.com',password:'test'}}
     }
   },*/
-  vuex: {
+   vuex: {
+     getters: {
+       userInfo :({ user }) => user
+     },
      actions: {
       login
     }

@@ -45,7 +45,7 @@ import { requestBook,confirmBook } from '../vuex/actions'
 import EditBook from '../components/EditBook'
 export default {
   components: { EditBook},
-  props:["item",'dimmer'],
+  props:["item"],
   
   methods: {
       showMap() {

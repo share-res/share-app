@@ -6,7 +6,7 @@
                 图书交流小助手<br>Books Share
             </h3>
             <ui-steps css="ordered">
-                <ui-step css="completed">
+                <ui-step css="active">
                     <ui-content>
                         <ui-title>浏览</ui-title>
                         <ui-description>查找图书</ui-description>

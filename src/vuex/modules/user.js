@@ -15,7 +15,9 @@ const state = {
   email: '',
   password: '',
   mobile:'',
-  location:{}
+  location:{},
+  message:''
+  
 }
 function sync({name,email,password,mobile,location}){
     state.email = email
@@ -49,16 +51,16 @@ const mutations = {
     const d = new Date();
     d.setTime(d.getTime() + 2 * 24 * 60 * 60 * 1000);
     const expires = d.toGMTString();
-    document.cookie = `token=${uid};expires=${expires}`;
+    document.cookie = `token=${uid};expires=${expires}`
     window.router.go(redirect);
   },
 
   [LOGIN_FAILURE](state) {
     state.auth_id = null
-    console.log('LOGIN_FAILURE')
+    state.message='登录失败，请输入注册登记的电子邮件及密码'
   },
   [BOOK_UPDATE_OK](state) {
-     console.log('BOOK_UPDATE_OK')
+     state.message='修改图书信息成功'
   }
 }
 
