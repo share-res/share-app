@@ -7,7 +7,7 @@
           修改个人资料
         </div>
       </h2>
-      <map :location='user.location'></map>
+      <map :location.sync='info.location'></map>
       <form class="ui large form">
         <div class="ui stacked segment">
           <div class="field">
@@ -44,15 +44,22 @@ import Map from '../components/Map'
 export default {
    components:{Map},
    data(){
+      console.log('setting data')
       return {
         info:{
           mobile:'',
           name:'',
-          location:{longitude:113.28, latitude:23.09}
+          location:{longitude:113, latitude:23}
         }
       }
    },
-  ready(){
+  created(){
+　　　this.info.location={
+       longitude:this.user.location.longitude,
+       latitude:this.user.location.latitude
+     }
+     console.log('setting created')
+     console.log(this.info.location.longitude,this.info.location.latitude)
      this.info.name=this.user.name
      this.info.mobile=this.user.mobile
    },

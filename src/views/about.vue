@@ -1,10 +1,21 @@
 <template>
-
-    <div class="ui vertical masthead center aligned segment">
+    <div class="ui vertical masthead inverted  segment">
+          <h5 class="ui header">
+                我两年前买了一本英文《简.爱》，看完了就一直放在一边，至今布满灰尘。<br>
+                而你则刚刚买了本《时间简史》。<br>
+                老师和家长都说:　高中应大量阅读课外读物! <br>
+                难道我们每个人都要买上百本书吗？<br>
+                或每周往返于图书馆？<br>
+                不如我们一起互相帮助吧！
+          </h5>
+            
+    </div>
+    <div class="ui vertical masthead center aligned  segment">
         <div class="ui text container">
             <h3 class="ui header">
                 图书交流小助手<br>Books Share
             </h3>
+           
             <ui-steps css="ordered">
                 <ui-step css="active">
                     <ui-content>
@@ -36,7 +47,7 @@
     </div>
 
 
-    <div class="ui inverted vertical footer segment">
+    <div class="ui inverted vertical footer center aligned segment">
         <div class="ui container">
             <div class="ui stackable inverted divided equal height stackable grid">
                 <div class="six wide column">
@@ -49,8 +60,8 @@
                 <div class="six wide column">
                     <h5 class="ui inverted header">联系我们</h5>
                     <div class="ui inverted link list">
-                        <a href="http://github.com/lshengjian" class="item" target="_blank">Alex</a>
-                        <a href="http://github.com/share-book" class="item" target="_blank">Judy</a>
+                        <a href="http://github.com/lshengjian" class="item" target="_blank">Alex(lsj178@139.com)</a>
+                        <a href="http://github.com/share-book" class="item" target="_blank">Judy(13710711847@163.com)</a>
                     </div>
                 </div>
 
@@ -77,10 +88,15 @@
 
 <style type="text/css">
     .masthead.segment {
-        min-height: 700px;
+        min-height: 300px;
         padding: 1em 0em;
     }
-    
+     .masthead h5.ui.header {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        font-size: 1.5em;
+        font-weight: normal;
+    }
     .masthead .ui.menu .ui.button {
         margin-left: 0.2em;
     }
@@ -97,22 +113,5 @@
         padding: 5em 0em;
     }
     
-    .secondary.pointing.menu .toc.item {
-        display: none;
-    }
-    
-    @media only screen and (max-width: 700px) {
-     
-        .secondary.pointing.menu .toc.item {
-            display: block;
-        }
-        .masthead.segment {
-            min-height: 350px;
-        }
-        .masthead h3.ui.header {
-            font-size: 2em;
-            margin-top: 1.5em;
-        }
-
-    }
+  
 </style>

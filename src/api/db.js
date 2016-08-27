@@ -14,7 +14,7 @@ function fetch (child) {
     return new Promise((resolve, reject) => {
       dbRef.child(child).once('value', snapshot => {
         const val = snapshot.val()
-        console.log(val)
+      //  console.log(val)
         // mark the timestamp when this item is cached
         val.__lastUpdated = Date.now()
         cache && cache.set(child, val)
@@ -43,6 +43,10 @@ export default {
    updateUser:async (user_id,{name,mobile,location}) => {
      let uid=user_id
      let user={location}
+      console.log('db  updateUser')
+       console.log(user.location.longitude,user.location.latitude)
+    // user.location.longitude+=0.0143
+    // user.location.latitude+=-0.014
      if (name!='') user.name=name
      if (mobile!='') user.mobile=mobile
      return await dbRef.child(`users/${uid}`).update(user)

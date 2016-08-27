@@ -94,5 +94,24 @@ export default {
 }
 </script>
 
+<style>
+  .secondary.pointing.menu .toc.item {
+        display: none;
+    }
+    
+    @media only screen and (max-width: 700px) {
+     
+        .secondary.pointing.menu .toc.item {
+            display: block;
+        }
+        .masthead.segment {
+            min-height: 350px;
+        }
+        .masthead h3.ui.header {
+            font-size: 2em;
+            margin-top: 1.5em;
+        }
 
-<
+    }
+
+ </style>

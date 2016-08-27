@@ -13,7 +13,7 @@ export default {
     location: {
       type: Object,
       default:  ()=>{
-        return {longitude:113.28, latitude:23.09}
+        return {longitude:0.01, latitude:0.01}
       }
     }
   },
@@ -21,7 +21,8 @@ export default {
         map = new  AMap.Map('map-container' , {resizeEnable: true})
         let self=this
         let ps=[self.location.longitude,self.location.latitude]
-    
+        console.log('map  ready')
+        console.log(ps)
         marker = new AMap.Marker({
               position : ps,
               offset : new AMap.Pixel(-12,-12),
