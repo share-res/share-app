@@ -2,7 +2,7 @@
 
   <div class="ui middle aligned center aligned grid">
     <div class="column">
-      <h2 class="ui teal image header">
+      <h2 class="ui teal  header">
         <div class="content">
           登录系统
         </div>
@@ -24,10 +24,8 @@
             </div>
           </div>
 
-          <!--<ui-button css="ui primary button" @click='login(user)'>
-            <ui-icon css="user">登　录</icon> fluid 
-          </ui-button>-->
-           <div class="ui  large primary button" @click='login(user)'>登　录</div>
+
+           <div class="ui  large primary button" @click='check()'>登　录</div>
 
         </div>
          <div id="errmsg" class="ui error message"></div>
@@ -47,11 +45,18 @@
 <script>
 
 import { login } from '../vuex/actions'
-
+import store from '../vuex/store'
 
 export default {
    data: ()=>{
       return {user:{email:'',password:''}} //test@139.com
+   },
+   methods:{
+     check(){
+       // validationRules = $('.form').form('get validation rules', 'input.email')
+        let rt= $('.form').form('validate form')
+        if(rt) login(store,this.user)
+     } 
    },
    ready() {
       $('.ui.form')

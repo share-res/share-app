@@ -33,7 +33,7 @@ export const login = async ({ dispatch, state}, user) => {
     if (!data)
       dispatch(types.LOGIN_FAILURE)
     else {
-      let redirect = decodeURIComponent(state.route.query.redirect || 'home')
+      let redirect = decodeURIComponent(state.route.query.redirect || 'myBooks')
       dispatch(types.LOGIN_PASS, data.uid,userInfo, redirect)
     }
   } catch (ex) {
@@ -43,7 +43,7 @@ export const login = async ({ dispatch, state}, user) => {
 }
 
 
-export const  saveBook =(user,book)=>{
+export const  saveBook =({ state},user,book)=>{
   db.saveBook(user,book)
 }
 

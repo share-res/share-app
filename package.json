@@ -20,6 +20,7 @@
     "lru-cache": "^4.0.1",
     "vue": "^1.0.26",
     "vue-router": "^0.7.13",
+    "vue-slider": "^1.1.1",
     "vuex": "^1.0.0-rc.2",
     "vuex-router-sync": "^2.0.2",
     "wilddog": "^0.7.2",

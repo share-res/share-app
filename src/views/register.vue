@@ -2,7 +2,7 @@
 
   <div class="ui middle aligned center aligned grid">
     <div class="column">
-      <h2 class="ui teal image header">
+      <h2 class="ui teal  header">
         <div class="content">
           注册新帐户
         </div>
@@ -10,34 +10,35 @@
       <map :location.sync='user.location'></map>
       <form class="ui large form">
         <div class="ui stacked segment">
-          <div class="field">
-            <div class="ui left icon input">
-             <ui-label>电子邮件：</ui-label>
+          <div class="required field">
+            <div class="ui  input">
+             <label>电子邮件：</label>
               <input type="text" name="email" v-model="user.email" placeholder="例如：alex@139.com，用于密码重置">
             </div>
           </div>
-          <div class="field">
-            <div class="ui left icon input">
-              <ui-label>密　　码：</ui-label>
+          <div class="required field">
+            <div class="ui  input">
+              <label>密　　码：</label>
               <input type="password" name="password" v-model="user.password" placeholder="请输入4-10位长度的字母或数字作为密码">
             </div>
           </div>
-          
+         
+          <div class="required field">
+            <div class="ui  input">
+              <label>手机号码：</label>
+              <input type="text" name="mobile" v-model="user.mobile" >
+            </div>
+          </div>
           <div class="field">
-            <div class="ui left icon input">
-              <ui-label>用户昵称：</ui-label>
-              <input type="text" name="name" v-model="user.name" placeholder="显示为书的拥有者">
+            <div class="ui  input">
+              <label>用户昵称：</label>
+              <input type="text" name="name" v-model="user.name" >
             </div>
           </div>
 
-          <div class="field">
-            <div class="ui left icon input">
-              <ui-label>手机号码：</ui-label>
-              <input type="text" name="mobile" v-model="user.mobile" placeholder="十分重要，请认真核对">
-            </div>
-          </div>
+ 
   
-           <ui-button css="large primary button" @click='register(user)'>
+           <ui-button css="large primary button" @click='check()'>
               <ui-icon css="user">注　册</icon>
             </ui-button>
 
@@ -58,6 +59,7 @@
 <script>
 
 import { register } from '../vuex/actions'
+import store from '../vuex/store'
 import Map from '../components/Map' 
 export default {
    components:{Map},
@@ -66,6 +68,14 @@ export default {
         location:{longitude:113.28, latitude:23.09}
       }}
    }, 
+
+   methods:{
+     check(){
+       // validationRules = $('.form').form('get validation rules', 'input.email')
+        let rt= $('.form').form('validate form')
+        if(rt) register(store,this.user)
+     } 
+   },
    vuex: {
      actions: {
       register
@@ -97,8 +107,21 @@ export default {
                   prompt : '密码不能为空'
                 },
                 {
-                  type   : 'length[4]',
+                  type   : 'minLength[4]',
                   prompt : '密码长度应大于4位字符'
+                }
+              ]
+            },
+            mobile: {
+              identifier  : 'mobile',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : '手机不能为空'
+                },
+                {
+                   type: 'minLength[11]',
+                   prompt : '手机长度应为11位数字'
                 }
               ]
             }

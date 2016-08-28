@@ -1,21 +1,23 @@
 <template>
     <div class="ui vertical masthead inverted  segment">
-          <h5 class="ui header">
-                我两年前买了一本英文《简.爱》，看完了就一直放在一边，至今布满灰尘。<br>
-                而你则刚刚买了本《时间简史》。<br>
-                老师和家长都说:　高中应大量阅读课外读物! <br>
-                难道我们每个人都要买上百本书吗？<br>
-                或每周往返于图书馆？<br>
-                不如我们一起互相帮助吧！
-          </h5>
-            
+        <h5 class="ui header">
+            我拥有一本已看完的《亲爱的安德烈》。<br> 你--我的朋友，却不知道。
+            <br> 不知什么时候起，你迷上了这本书，费劲心思跑去图书馆借。
+            <br> 没借到，又去书店买.
+            <br> 如果你当初知道我有这本书，情况就不同了。
+            <br> 可以省下很多时间和精力:-)
+            <br>
+            <br>
+
+        </h5>
+
     </div>
     <div class="ui vertical masthead center aligned  segment">
         <div class="ui text container">
             <h3 class="ui header">
                 图书交流小助手<br>Books Share
             </h3>
-           
+
             <ui-steps css="ordered">
                 <ui-step css="active">
                     <ui-content>
@@ -45,8 +47,11 @@
             <div class="ui huge primary button" @click='list()'>Get Started <i class="right arrow icon"></i></div>
         </div>
     </div>
-
-
+  <!--   <div class="ui image container">
+        <slider :items="items" :speed="2" :delay="3" :pause="true" :autoplay: "true" :dots="true" :arrows: "true">
+        </slider>
+    </div>
+    -->
     <div class="ui inverted vertical footer center aligned segment">
         <div class="ui container">
             <div class="ui stackable inverted divided equal height stackable grid">
@@ -60,8 +65,9 @@
                 <div class="six wide column">
                     <h5 class="ui inverted header">联系我们</h5>
                     <div class="ui inverted link list">
-                        <a href="http://github.com/lshengjian" class="item" target="_blank">Alex(lsj178@139.com)</a>
                         <a href="http://github.com/share-book" class="item" target="_blank">Judy(13710711847@163.com)</a>
+                        <a href="http://github.com/lshengjian" class="item" target="_blank">Alex(lsj178@139.com)</a>
+
                     </div>
                 </div>
 
@@ -73,7 +79,27 @@
 
 
 <script>
+   // import Slider from 'vue-slider'
     export default {
+    /*    components: {Slider },
+        data(){
+            return {
+            items: [
+          {
+            src: '/static/images/img-0.jpg',
+            alt: '时间简史'
+          },
+          {
+            src: '/static/images/img-1.jpg',
+            alt: '红楼梦'
+          },
+          {
+            src: '/static/images/img-2.jpg',
+            alt: '简爱'
+          }
+          ]
+         }
+        },*/
         methods:{
             list(){
                
@@ -91,12 +117,14 @@
         min-height: 300px;
         padding: 1em 0em;
     }
-     .masthead h5.ui.header {
+    
+    .masthead h5.ui.header {
         margin-top: 2em;
         margin-bottom: 2em;
         font-size: 1.5em;
         font-weight: normal;
     }
+    
     .masthead .ui.menu .ui.button {
         margin-left: 0.2em;
     }
@@ -108,10 +136,7 @@
         font-weight: normal;
     }
     
-   
     .footer.segment {
         padding: 5em 0em;
     }
-    
-  
 </style>
