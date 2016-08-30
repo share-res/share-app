@@ -31,12 +31,12 @@
        <br>
 　　　　{{{item.description}}}
        <br>
-      <p>登录系统后可以申请借书!</p>
+      <p v-if="!user_id">登录系统后可以申请借书!</p>
        <br>
       <div  v-if="user_id&&item.state=='可借'">
         <p>最好短信或邮件通知书的主人:-),加快办理!<br>别忘了最后一定要在系统内申请，书的主人才能进行借出操作!</p>
-       <a href="sms:{{item.ownerMobile}}">发短信</a><br>
-       <a href="mailto:{{owner.email}}">发邮件</a><br>
+       <a href="sms:{{item.ownerMobile}}">发短信</a>
+       <a href="mailto:{{owner.email}}" style=" margin-left: 4em;">发邮件</a><br><br>
        <ui-button css="ui primary button"  @click="requestBook(item,userName,mobile)">系统内申请</ui-button>
       </div>
  </div>
