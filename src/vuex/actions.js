@@ -19,7 +19,7 @@ export const requestBook = async ({ dispatch },book,requester,mobile) => {
 
 }
 export const confirmBook = async ({ dispatch },book,state) => {
-  console.log(state)
+  //console.log(state)
   db.confirmBook(book['.key'],state)
 //  dispatch(types.USER_REGISTED,uid,user)
 
@@ -29,7 +29,7 @@ export const login = async ({ dispatch, state}, user) => {
     let data = await db.login(user)
     console.log(user)
     let userInfo=await db.fetchUser(data.uid)
-    console.log(userInfo)
+   // console.log(userInfo)
     if (!data)
       dispatch(types.LOGIN_FAILURE)
     else {

@@ -36,7 +36,7 @@ export default {
      //console.log(authData.uid)
      let uid=authData.uid
       await dbRef.child('users').update({
-           [`${uid}`]: {name,mobile,location,state:'OK'}
+           [`${uid}`]: {name,mobile,email,location,state:'OK'}
      })
      return uid
    },
